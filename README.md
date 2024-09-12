@@ -32,13 +32,13 @@ virtualenv
 
         Clone the project repository to your local machine using the following command:
     
-        git clone https://github.com/brook1167/Telecom-Analysis/
+        git clone https://github.com/brook1167/AlphaCare-Insurance-Solutions
 
     2. Install dependencies
     
        Navigate to the project directory and create a virtual environment using virtualenv:
     
-       cd Telecom-Analysis
+       cd AlphaCare-Insurance-Solutions
        
        virtualenv venv
 
