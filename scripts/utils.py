@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 def missing_data(data):
   
     # Total missing values per column
@@ -101,3 +103,29 @@ def handle_missing_data(df):
                     df[col] = df[col].fillna(0)  # Default for empty median
 
     return df
+
+
+# Ploating functions
+
+def plot_univariate_analysis(data: pd.DataFrame, num_cols=None, cat_cols=None):
+
+    # Histograms for Numerical Columns
+    for col in num_cols:
+        plt.figure(figsize=(8, 3))  # Increased figure size slightly
+        sns.histplot(data[col].dropna(), kde=True, bins=30, color='darkcyan', edgecolor='black', alpha=0.8)
+        plt.title(f'Distribution of {col}')
+        plt.xlabel(col)
+        plt.ylabel('Frequency')
+        plt.tight_layout()
+        plt.show()
+
+    # Bar Charts for Categorical Columns
+    for col in cat_cols:
+        plt.figure(figsize=(8, 4))  # Increased figure size slightly
+        sns.countplot(x=col, data=data, order=data[col].value_counts().index)
+        plt.title(f'Distribution of {col}')
+        plt.xlabel(col)
+        plt.xticks(rotation=45)
+        plt.ylabel('Count')
+        plt.tight_layout()
+        plt.show()
