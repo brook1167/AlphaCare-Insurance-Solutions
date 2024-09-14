@@ -143,3 +143,28 @@ def correlation_matrix(data, cols):
     sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
     plt.title('Correlation Matrix')
     plt.show()
+
+def plot_cover_type_frequencies(df, column_name):
+
+    # Compute value counts
+    cover_type_counts = df[column_name].value_counts()
+
+    # Create a bar chart with a color palette
+    plt.figure(figsize=(12, 4))
+    sns.barplot(x=cover_type_counts.index, y=cover_type_counts, palette='viridis')
+    plt.title(f'{column_name} Frequencies')
+    plt.xlabel(column_name)
+    plt.ylabel('Count')
+    plt.xticks(rotation=90)  # Rotate labels to the bottom
+    plt.show()
+
+
+def detect_outliers_boxplots(data: pd.DataFrame, numerical_cols=None):
+    
+    for col in numerical_cols:
+        plt.figure(figsize=(8, 4))  # Set the figure size
+        sns.boxplot(x=data[col])
+        plt.title(f'Box Plot for {col}')
+        plt.xlabel(col)
+        plt.tight_layout()
+        plt.show()
