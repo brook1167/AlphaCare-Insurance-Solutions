@@ -129,3 +129,17 @@ def plot_univariate_analysis(data: pd.DataFrame, num_cols=None, cat_cols=None):
         plt.ylabel('Count')
         plt.tight_layout()
         plt.show()
+
+def scatter_plot(data, x_col, y_col,hue_col):
+    plt.figure(figsize=(8, 4))
+    sns.scatterplot(data=data, x=x_col, y=y_col,hue=hue_col)
+    plt.title(f'Scatter Plot of {x_col} vs {y_col}')
+    plt.show()
+
+def correlation_matrix(data, cols):
+
+    corr_matrix = data[cols].corr()
+    plt.figure(figsize=(8, 4))
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+    plt.title('Correlation Matrix')
+    plt.show()
