@@ -137,7 +137,6 @@ def scatter_plot(data, x_col, y_col,hue_col):
     plt.show()
 
 def correlation_matrix(data, cols):
-
     corr_matrix = data[cols].corr()
     plt.figure(figsize=(8, 4))
     sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
@@ -145,7 +144,6 @@ def correlation_matrix(data, cols):
     plt.show()
 
 def plot_cover_type_frequencies(df, column_name):
-
     # Compute value counts
     cover_type_counts = df[column_name].value_counts()
 
@@ -168,3 +166,11 @@ def detect_outliers_boxplots(data: pd.DataFrame, numerical_cols=None):
         plt.xlabel(col)
         plt.tight_layout()
         plt.show()
+
+def trend_over_geography(df, geography_column, value_column):
+    grouped = df.groupby(geography_column)[value_column].mean().sort_values(ascending=False)
+    plt.figure(figsize=(12, 6))
+    grouped.plot(kind='bar')
+    plt.title(f'Average {value_column} by {geography_column}')
+    plt.xticks(rotation=90) 
+    plt.show()
