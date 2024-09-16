@@ -130,10 +130,12 @@ def plot_univariate_analysis(data: pd.DataFrame, num_cols=None, cat_cols=None):
         plt.tight_layout()
         plt.show()
 
-def scatter_plot(data, x_col, y_col,hue_col):
+def scatter_plot(data, x_col, y_col,hue_col=None):
     plt.figure(figsize=(8, 4))
     sns.scatterplot(data=data, x=x_col, y=y_col,hue=hue_col)
     plt.title(f'Scatter Plot of {x_col} vs {y_col}')
+    if hue_col:
+        plt.legend(loc='upper right')
     plt.show()
 
 def correlation_matrix(data, cols):
