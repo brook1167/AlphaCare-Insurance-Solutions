@@ -168,6 +168,33 @@ def detect_outliers_boxplots(data: pd.DataFrame, numerical_cols=None):
         plt.xlabel(col)
         plt.tight_layout()
         plt.show()
+    
+def cap_outliers(df, columns=None):
+    df_capped = df.copy()
+    
+    if columns is None:
+        columns = df_capped.select_dtypes(include=[np.number]).columns
+    
+    for column in columns:
+        Q1 = df_capped[column].quantile(0.25)
+        Q3 = df_capped[column].quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        
+        df_capped.loc[df_capped[column] < lower_bound, column] = lower_bound
+        df_capped.loc[df_capped[column] > upper_bound, column] = upper_bound
+    
+    return df_capped
+
+
+# outlier plot for each individual numeric column
+def outlier_box_plots(df):
+    for column in df:
+        plt.figure(figsize=(10, 5))
+        sns.boxplot(x=df[column])
+        plt.title(f'Box plot of {column}')
+        plt.show()
 
 def trend_over_geography(df, geography_column, value_column):
     grouped = df.groupby(geography_column)[value_column].mean().sort_values(ascending=False)
